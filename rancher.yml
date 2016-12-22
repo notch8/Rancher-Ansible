@@ -1,31 +1,28 @@
 ---
-
-- name: Installing and configuring Docker 
-  hosts: all
-  sudo: yes
-  roles:
-    - { role: docker, tags: ["docker"] }
+# - -
 
 - name: Setting up Rancher Server
-  hosts: "rancher"
+  hosts: 127.0.0.1
+  connection: local
   sudo: yes
   roles:
     - { role: rancher, tags: ["rancher"] }
   
 - name: Register Rancher Hosts
-  hosts: "nodes"
+  hosts: 127.0.0.1
+  connection: local
   sudo: yes
   roles:
     - { role: rancher_reg, tags: ["rancher_reg"] }
 
-- name: Deploy MySQL Container
-  hosts: 'database'
-  sudo: yes
-  roles:
-      - { role: mysql_docker, tags: ["mysql_docker"] }
+# - name: Deploy MySQL Container
+#   hosts: 'database'
+#   sudo: yes
+#   roles:
+#       - { role: mysql_docker, tags: ["mysql_docker"] }
 
-- name: Deploy Wordpress App
-  hosts: "application"
-  sudo: yes
-  roles:
-    - { role: wordpress_docker, tags: ["wordpress_docker"] }
+# - name: Deploy Wordpress App
+#   hosts: "application"
+#   sudo: yes
+#   roles:
+#     - { role: wordpress_docker, tags: ["wordpress_docker"] }
