@@ -15,14 +15,8 @@
   roles:
     - { role: rancher_reg, tags: ["rancher_reg"] }
 
-# - name: Deploy MySQL Container
-#   hosts: 'database'
-#   sudo: yes
-#   roles:
-#       - { role: mysql_docker, tags: ["mysql_docker"] }
-
-# - name: Deploy Wordpress App
-#   hosts: "application"
-#   sudo: yes
-#   roles:
-#     - { role: wordpress_docker, tags: ["wordpress_docker"] }
+- name: Create api key
+  hosts: 127.0.0.1
+  connection: local
+  roles:
+    - { role: rancher_api, tags: ["rancher_api"] }

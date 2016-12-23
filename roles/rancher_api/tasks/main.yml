@@ -1,0 +1,23 @@
+---
+- name: Create api
+  command: ./api.sh
+  register: rancher_api_output
+
+- debug:
+    msg: "{{ rancher_api_output.stdout|from_json }}"
+
+- debug: 
+    msg: "{{ (rancher_api_output.stdout|from_json).publicValue }}" 
+
+- debug: 
+    msg: "{{ (rancher_api_output.stdout|from_json).secretValue }}" 
+
+- name: Get ec2 information
+  action: uri
+      method=GET
+      status_code=200
+      url="http://169.254.169.254/latest/dynamic/instance-identity/document" return_content=yes
+  register: ec2_info
+
+- debug:
+    msg: "{{ ec2_info }}"
