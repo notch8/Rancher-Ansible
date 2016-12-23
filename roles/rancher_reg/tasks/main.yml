@@ -1,6 +1,6 @@
 ---
 - name: Install httplib2
-  apt:
+  yum:
       name=python-httplib2
       update_cache=yes
 
