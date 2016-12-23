@@ -2,6 +2,9 @@
 - name: Create api
   command: ./api.sh
   register: rancher_api_output
+  until: rancher_logs.stdout.find("publicValue") != -1
+  retries: 30
+  delay: 10
 
 - debug:
     msg: "{{ rancher_api_output.stdout|from_json }}"
