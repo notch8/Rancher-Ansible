@@ -19,4 +19,4 @@
     method: POST
     return_content: yes
     HEADER_Content-Type: "application/json"
-    body: {"publicValue":"{{ (rancher_api_output.stdout|from_json).publicValue }}","secretValue":"{{ (rancher_api_output.stdout|from_json).secretValue }}","instance_ip":"{{ (ec2_info.content|from_json).privateIp }}","instance_id":"{{ (ec2_info.content|from_json).instanceId }}"}
+    body: ' { "publicValue":"{{ (rancher_api_output.stdout|from_json).publicValue }}","secretValue":"{{ (rancher_api_output.stdout|from_json).secretValue }}","instance_ip":"{{ (ec2_info.content|from_json).privateIp }}","instance_id":"{{ (ec2_info.content|from_json).instanceId }}" } '
