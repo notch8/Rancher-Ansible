@@ -26,7 +26,7 @@
       status_code=200
       url="http://{{ rancher_server }}:{{ rancher_port }}/v2-beta/projects/{{ project_id.json['data'][0]['id'] }}/stacks" return_content=yes
   register: rancher_stack_info
-  until: rancher_stack_info.json['data'][0]['state'] == 'active' and rancher_stack_info.json['data'][1]['state'] == 'active' and rancher_stack_info.json['data'][2]['state'] == 'active' and rancher_stack_info.json['data'][3]['state'] == 'active'
+  until: rancher_stack_info.json['data'][0]['healthState'] == 'healthy' and rancher_stack_info.json['data'][1]['healthState'] == 'healthy' and rancher_stack_info.json['data'][2]['healthState'] == 'healthy' and rancher_stack_info.json['data'][3]['healthState'] == 'healthy'
   retries: 30
   delay: 10
 
