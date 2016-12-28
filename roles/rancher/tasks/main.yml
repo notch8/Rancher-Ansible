@@ -1,6 +1,6 @@
 ---
-- name: Wait for the Rancher agent to start
-  wait_for: timeout=30
+# - name: Wait for the Rancher agent to start
+#   wait_for: timeout=30
 
 - name: Pull and run the Rancher/server contianer
   docker:
