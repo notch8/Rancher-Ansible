@@ -20,21 +20,21 @@
       url="http://{{ rancher_server }}:{{ rancher_port }}/v1/projects" return_content=yes
   register: project_id
 
-# - name: make sure utility stacks are running
-#   action: uri
-#       method=GET
-#       status_code=200
-#       url="http://{{ rancher_server }}:{{ rancher_port }}/v2-beta/projects/{{ project_id.json['data'][0]['id'] }}/stacks" return_content=yes
-#   register: rancher_stack_info
-#   until: rancher_stack_info.json['data'][0]['healthState'] == 'healthy' and rancher_stack_info.json['data'][1]['healthState'] == 'healthy' and rancher_stack_info.json['data'][2]['healthState'] == 'healthy' and rancher_stack_info.json['data'][3]['healthState'] == 'healthy'
-#   retries: 30
-#   delay: 10
+- name: make sure utility stacks are running
+  action: uri
+      method=GET
+      status_code=200
+      url="http://{{ rancher_server }}:{{ rancher_port }}/v2-beta/projects/{{ project_id.json['data'][0]['id'] }}/stacks" return_content=yes
+  register: rancher_stack_info
+  until: rancher_stack_info.json['data'][0]['healthState'] == 'healthy' and rancher_stack_info.json['data'][1]['healthState'] == 'healthy' and rancher_stack_info.json['data'][2]['healthState'] == 'healthy' and rancher_stack_info.json['data'][3]['healthState'] == 'healthy'
+  retries: 30
+  delay: 10
 
-# - debug:
-#     msg: "{{ rancher_stack_info.json['data'][0]['state'] }} {{ rancher_stack_info.json['data'][1]['state'] }} {{ rancher_stack_info.json['data'][2]['state'] }} {{ rancher_stack_info.json['data'][3]['state'] }}"
+- debug:
+    msg: "{{ rancher_stack_info.json['data'][0]['state'] }} {{ rancher_stack_info.json['data'][1]['state'] }} {{ rancher_stack_info.json['data'][2]['state'] }} {{ rancher_stack_info.json['data'][3]['state'] }}"
 
-# - debug:
-#     msg: "{{ rancher_stack_info.json['data'][0]['healthState'] }} {{ rancher_stack_info.json['data'][1]['healthState'] }} {{ rancher_stack_info.json['data'][2]['healthState'] }} {{ rancher_stack_info.json['data'][3]['healthState'] }}"
+- debug:
+    msg: "{{ rancher_stack_info.json['data'][0]['healthState'] }} {{ rancher_stack_info.json['data'][1]['healthState'] }} {{ rancher_stack_info.json['data'][2]['healthState'] }} {{ rancher_stack_info.json['data'][3]['healthState'] }}"
 
 - name: trigger lambda    
   uri: 

@@ -4,14 +4,12 @@
 - name: Setting up Rancher Server
   hosts: 127.0.0.1
   connection: local
-  sudo: yes
   roles:
     - { role: rancher, tags: ["rancher"] }
   
 - name: Register Rancher Hosts
   hosts: 127.0.0.1
   connection: local
-  sudo: yes
   roles:
     - { role: rancher_reg, tags: ["rancher_reg"] }
 
