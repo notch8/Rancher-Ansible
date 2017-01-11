@@ -3,12 +3,13 @@
 #   wait_for: timeout=30
 
 - name: Pull and run the Rancher/server contianer
-  docker:
-      name: "{{ rancher_name }}"
-      image: rancher/server:latest
-      restart_policy: always
-      ports: 
-        - "{{ rancher_port }}:8080"
+  docker_container:
+    api_version: 1.22
+    name: "{{ rancher_name }}"
+    image: rancher/server:latest
+    restart_policy: always
+    ports: 
+      - "{{ rancher_port }}:8080"
 
 - name: Wait for the Rancher server to start
   action: command docker logs {{ rancher_name }}

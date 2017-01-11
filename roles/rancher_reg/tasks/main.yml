@@ -1,8 +1,6 @@
 ---
 - name: Install httplib2
-  yum:
-      name=python-httplib2
-      update_cache=yes
+  pip: name=httplib2
 
 - name: Get the default project id
   action: uri
@@ -29,13 +27,14 @@
   register: containers
 
 - name: Register the Host machine with the Rancher server
-  docker:
-      image: rancher/agent:v{{ rancher_agent_version }}
-      privileged: yes
-      detach: True
-      volumes: /var/run/docker.sock:/var/run/docker.sock
-      command: "{{ rancher_token.json['registrationUrl'] }}"
-      state: started
+  docker_container:
+    name: ranger-agent
+    image: rancher/agent:v{{ rancher_agent_version }}
+    privileged: yes
+    detach: True
+    volumes: /var/run/docker.sock:/var/run/docker.sock
+    command: "{{ rancher_token.json['registrationUrl'] }}"
+    state: started
   when: "{{ 'rancher-agent' not in containers.stdout }}"
 
 - name: Wait for the Rancher agent to start

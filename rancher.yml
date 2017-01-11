@@ -1,20 +1,21 @@
 ---
 # - -
+- name: Set up Docker on host
+  hosts: all
+  roles:
+    - docker
 
 - name: Setting up Rancher Server
-  hosts: 127.0.0.1
-  connection: local
+  hosts: all
   roles:
     - { role: rancher, tags: ["rancher"] }
   
 - name: Register Rancher Hosts
-  hosts: 127.0.0.1
-  connection: local
+  hosts: all
   roles:
     - { role: rancher_reg, tags: ["rancher_reg"] }
 
-- name: Create api key
-  hosts: 127.0.0.1
-  connection: local
-  roles:
-    - { role: rancher_api, tags: ["rancher_api"] }
+#- name: Create api key
+#  hosts: all
+#  roles:
+#    - { role: rancher_api, tags: ["rancher_api"] }
