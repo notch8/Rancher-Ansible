@@ -1,2 +1,5 @@
-[Rancher]
+[rancher]
+rancher ansible_ssh_port=22 ansible_ssh_host=138.197.5.28 ansible_user=root
+
+[nodes]
 rancher ansible_ssh_port=22 ansible_ssh_host=138.197.5.28 ansible_user=root

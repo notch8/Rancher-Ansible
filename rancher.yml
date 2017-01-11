@@ -6,12 +6,12 @@
     - docker
 
 - name: Setting up Rancher Server
-  hosts: all
+  hosts: "rancher"
   roles:
     - { role: rancher, tags: ["rancher"] }
   
 - name: Register Rancher Hosts
-  hosts: all
+  hosts: "nodes"
   roles:
     - { role: rancher_reg, tags: ["rancher_reg"] }
 
